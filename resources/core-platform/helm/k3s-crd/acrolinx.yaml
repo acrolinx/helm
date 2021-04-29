@@ -1,0 +1,61 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: acrolinx
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: acrolinx-system
+
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: acrolinx
+  namespace: acrolinx-system
+spec:
+  repo: https://acrolinx.github.io/helm/
+  chart: acrolinx-platform
+  version: "0.8.12+2021.03"
+  set:
+    ### Image download - Enter your credentials for the Acrolinx download area
+    ### to be able to download the container images.
+    images.download_area_user: ""
+    images.download_area_pwd: ""
+
+    ### Configuration directory
+    platform.spec.securityContext.runAsUser: 1001
+    platform.spec.securityContext.runAsGroup: 1001
+    platform.spec.coreServer.overlayDirectory.volumeSource.hostPath.path: >
+      /home/acrolinx/config
+
+### Guidance package
+platform.spec.guidance: "standard:43854"
+valuesContent: |-
+  platform:
+    spec:
+      languageServers:
+        - name: default
+          languages: [ en, de ]
+        #- name: large
+        #  languages: [ en, de ]
+        #  template:
+        #    containers:
+        #      - name: language-server
+        #        resources:
+        #          limits:
+        #            memory: 6Gi
+      configuration:
+        ### Override settings from the `server/bin/coreserver.properties`.
+        coreserver.properties: |
+          features.enableTargetService=false
+
+    ### Database settings.
+    ### Preconfigured to work with the test database.
+    persistence:
+      ### Set to `true` to install Postgres test databases into the cluster.
+      ### Never set to `true` in a production system!!
+      installTestDB: false

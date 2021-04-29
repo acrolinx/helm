@@ -3,6 +3,16 @@ entries:
   acrolinx-platform:
   - apiVersion: v2
     appVersion: "2021.03"
+    created: "2021-04-29T12:18:42.918501072Z"
+    description: 'A Helm chart for the Acrolinx Core Platform Operator: Runs the Acrolinx Core Platform.'
+    digest: a3231f20edfc0c031388d3586eaffa072916bf290fc680eb3cba234264b8353c
+    name: acrolinx-platform
+    type: application
+    urls:
+    - https://acrolinx.github.io/helm/acrolinx-platform-0.8.12+2021.03.tgz
+    version: 0.8.12+2021.03
+  - apiVersion: v2
+    appVersion: "2021.03"
     created: "2021-04-16T16:17:47.597267318Z"
     description: 'A Helm chart for the Acrolinx Core Platform Operator: Runs the Acrolinx Core Platform.'
     digest: ef861dbddbeca8135eafe987298a376385c2ee90225273a281cf7e26568e1a0e
@@ -51,4 +61,4 @@ entries:
     urls:
     - https://acrolinx.github.io/helm/acrolinx-platform-0.8.4+2021.03.tgz
     version: 0.8.4+2021.03
-generated: "2021-04-16T16:17:47.586375015Z"
+generated: "2021-04-29T12:18:42.90990335Z"
