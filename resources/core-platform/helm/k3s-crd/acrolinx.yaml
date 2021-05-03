@@ -2,14 +2,12 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: acrolinx
-
+  name: acrolinx-system
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: acrolinx-system
-
+  name: acrolinx
 ---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
@@ -19,7 +17,7 @@ metadata:
 spec:
   repo: https://acrolinx.github.io/helm/
   chart: acrolinx-platform
-  version: "0.8.12+2021.03"
+  version: "0.8.13+2021.03"
   set:
     ### Image download - Enter your credentials for the Acrolinx download area
     ### to be able to download the container images.
@@ -36,6 +34,7 @@ spec:
 platform.spec.guidance: "standard:43854"
 valuesContent: |-
   platform:
+    features: []
     spec:
       languageServers:
         - name: default
@@ -50,9 +49,7 @@ valuesContent: |-
         #            memory: 6Gi
       configuration:
         ### Override settings from the `server/bin/coreserver.properties`.
-        coreserver.properties: |
-          features.enableTargetService=false
-
+        coreserver.properties: ""
     ### Database settings.
     ### Preconfigured to work with the test database.
     persistence:

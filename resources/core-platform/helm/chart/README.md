@@ -1,7 +1,7 @@
 Acrolinx Platform 2021.03 Helm Chart
 ===========================================================
 
-This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.12 in a single node Kubernetes cluster.
+This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.13 in a single node Kubernetes cluster.
 
 About
 -------
@@ -35,8 +35,8 @@ Prerequisites
 You need administrative access to a Kubernetes cluster, [Helm 3][helm-3] and [`kubectl`][kubernetes-kubectl].
 
 Moreover, you need access to the Acrolinx Platform images.
-Acrolinx distributes the Core Platform images via a private container registry. 
-The credentials for that registry are temporary. 
+Acrolinx distributes the Core Platform images via a private container registry.
+The credentials for that registry are temporary.
 They can be obtained and refreshed through the [Acrolinx download area][acrolinx-docs-download-area].
 [The Helm installation can perform the refreshing automatically][this-creds].
 
@@ -74,14 +74,13 @@ Usage
 
 ### The Deliverable
 
-> **Note** you can find the Acrolinx Helm repository with all our charts at https://acrolinx.github.io/helm/.
+You can find the Acrolinx Helm repository with all our charts at [https://acrolinx.github.io/helm/][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.12+2021.03.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.13+2021.03.tgz`, or via a [Helm repository][helm-repos].
 If you're installing from a repository, you may have to [add that repository][helm-repo-add] first.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install] it makes no difference.
 The chart name from the repository, the `.` or the `.tgz` file all appear in the same position.
-Throughout this section we'll subsume them simply by `<chart>`.
 
 ### Exploration
 
@@ -89,17 +88,17 @@ If you aren't already familiar with the Acrolinx Standard Stack Helm deployment,
 
 To [see basic information about the chart][helm-show-chart], run:
 ```shell
-helm show chart <chart>
+helm show chart acrolinx-platform
 ```
 
 To [see this README][helm-show-readme], run:
 ```shell
-helm show readme <chart>
+helm show readme acrolinx-platform
 ```
 
 To [see the effective default values][helm-show-values], run
 ```shell
-helm show values <chart>
+helm show values acrolinx-platform
 ```
 
 ### Configuration
@@ -109,7 +108,7 @@ Before you install the Acrolinx Platform to Kubernetes, you may want to modify s
 #### Customize the Values File
 Run
 ```shell
-helm show values <chart> > custom-values.yaml
+helm show values acrolinx-platform > custom-values.yaml
 ```
 Move the resulting custom [values][helm-value-files] file to a location where it can persist, say `acrolinx.yaml`.
 The comments above the individual settings should give good hints what you can do.
@@ -117,10 +116,10 @@ Make the desired modifications.
 
 #### Registry Credentials
 
-The Acrolinx Platform and operator images are distributed via a private Acrolinx registry. 
+The Acrolinx Platform and operator images are distributed via a private Acrolinx registry.
 Temporary credentials for that registry are available via the [Acrolinx download area][acrolinx-docs-download-area].
 The Helm chart manages a job to refresh those credentials automatically.
-To do so, it needs credentials for the download area. 
+To do so, it needs credentials for the download area.
 They're configured in the `images.download_area_user` and `images.download_area_pwd` properties:
 ```yaml
 images:
@@ -129,7 +128,7 @@ images:
 ```
 
 If you copied the images to your own private registry and are pulling from there, just omit (remove) the `download_area_.*` settings.
-Instead, use: 
+Instead, use:
 ```yaml
 images:
   username: "<username for private registry>"
@@ -137,7 +136,7 @@ images:
 ```
 
 #### User
-For security reasons, the Core Platform services shouldn't run with `root` privileges. 
+For security reasons, the Core Platform services shouldn't run with `root` privileges.
 Please create a dedicated unprivileged user, say `acrolinx` and use that user's ID and GID for the platform services:
 ```yaml
 platform:
@@ -187,25 +186,56 @@ platform:
 
 The canonical command to install the Acrolinx Platform via Helm is:
 ```shell
-helm install acrolinx --values <custom values file> <chart>
+helm install acrolinx --values <custom values file> acrolinx-platform
 ```
 You can also set individual values on the command line. (See the [Helm install reference][helm-install]).
 
 Run
 ```shell
-helm upgrade acrolinx --values <custom values file> <chart> --namespace acrolinx-system
+helm upgrade acrolinx --values <custom values file> acrolinx-platform --namespace acrolinx-system
 ```
 
 Acrolinx will deliver a new Helm chart for every Standard Stack Acrolinx Platform version.
+
+### Sanity Check
+
+After the installation or upgrade wait for a while. 
+Depending on how many images need to be pulled, it may take several minutes for the Core Platform to start.
+```shell
+kubectl wait coreplatform acrolinx  --for condition=Ready --timeout=10m -n acrolinx
+```
+
+To see a summary of the platform status, run:
+```shell 
+kubectl get coreplatform acrolinx -o jsonpath="{.status.summary}" -n acrolinx | jq
+```
+For all status details:
+```shell
+kubectl get coreplatform acrolinx -o jsonpath="{.status}" -n acrolinx | jq
+```
+
+
+### Troubleshooting
+
+What can possibly go wrong? 
+
+To find out you can use our [support package script][acrolinx-helm-repo-support-package-script]. 
+Just execute the script as described [here][acrolinx-helm-repo-support-package-script-manual]. Send the resulting `.tgz` file to [Acrolinx Support][acrolinx-support].
+
+
 
 
 [acrolinx-blog]: https://www.acrolinx.com/blog/
 [acrolinx-docs]: https://docs.acrolinx.com/doc/en
 [acrolinx-docs-configuration-directory]: https://docs.acrolinx.com/coreplatform/latest/en/advanced/the-configuration-directory
 [acrolinx-docs-download-area]: https://docs.acrolinx.com/coreplatform/latest/en/acrolinx-on-premise-only/maintain-the-core-platform/download-updated-software
+[acrolinx-helm-repo]: https://acrolinx.github.io/helm/
+[acrolinx-helm-repo-support-package-script]: https://acrolinx.github.io/helm/resources/core-platform/tools/support-package.sh
+[acrolinx-helm-repo-support-package-script-manual]: https://acrolinx.github.io/helm/resources/core-platform/tools/support-package-user-manual.md
 [acrolinx-home]: https://www.acrolinx.com
 [acrolinx-platform]: https://www.acrolinx.com/the-acrolinx-content-strategy-governance-platform/
-[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.03/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
+[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.03/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases 
+[acrolinx-support]: https://support.acrolinx.com/hc/en-us
 [docker-what-is-a-container]: https://www.docker.com/resources/what-container
 [helm-3]: https://helm.sh/blog/helm-3-released/
 [helm-charts]: https://helm.sh/docs/topics/charts/
