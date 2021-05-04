@@ -17,8 +17,11 @@ metadata:
 spec:
   repo: https://acrolinx.github.io/helm/
   chart: acrolinx-platform
-  version: "0.8.14+2021.03"
+  version: "0.8.15+2021.03"
   set:
+    ### Guidance package
+    platform.spec.guidance: "standard:43854"
+
     ### Image download - Enter your credentials for the Acrolinx download area
     ### to be able to download the container images.
     images.downloadAreaUser: ""
@@ -35,8 +38,6 @@ spec:
 
     ### A list of feature flags that should be enabled. Our support staff may ask you to add flags here. Format: "{feature-1,feature-2}"
     platform.features: "{}"
-    ### Guidance package
-    platform.spec.guidance: "standard:43854"
   valuesContent: |-
     platform:
       spec:

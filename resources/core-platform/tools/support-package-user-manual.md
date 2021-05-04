@@ -1,3 +1,7 @@
+---
+title: Capture Cluster State For Acrolinx Support
+---
+
 # Observe Acrolinx Running on Top of Kubernetes
 
 System observability is an important topic. It's all about ensuring everything is functioning as intended. Continuously monitoring and detecting errors or system malfunctions always crucial. In case of problems, we can help our Standard Stack customers troubleshooting.
@@ -14,6 +18,10 @@ The `Support Package Script` is a simple executable shell script that collects a
 
 **Prerequisites:**
 - `bzip2` installed on host.
+
+### Get it
+
+You can download the support package script [here](https://acrolinx.github.io/helm/resources/core-platform/tools/support-package.sh).
 
 ### How to Use
 

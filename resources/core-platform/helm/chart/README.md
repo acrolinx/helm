@@ -1,7 +1,7 @@
 Acrolinx Platform 2021.03 Helm Chart
 ===========================================================
 
-This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.14 in a single node Kubernetes cluster.
+This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.15 in a single node Kubernetes cluster.
 
 About
 -------
@@ -76,7 +76,7 @@ Usage
 
 You can find the Acrolinx Helm repository with all our charts at [https://acrolinx.github.io/helm/][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.14+2021.03.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.15+2021.03.tgz`, or via a [Helm repository][helm-repos].
 If you're installing from a repository, you may have to [add that repository][helm-repo-add] first.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install] it makes no difference.
@@ -186,6 +186,28 @@ platform:
   persistence:
     installTestDB: true
 ```
+
+#### TLS for Ingress
+
+We strongly recommend that you only access the Core Platform using a secure connection.
+TLS support is integrated with Træfik and configured by our operator. You need to add your server
+certificate as a secret to the cluster. Then you can configure the helm chart with the
+name of that secret. Note that the secret must be placed in the `acrolnx` namespace.
+
+You can upload your certificate like this:
+```shell
+kubectl -n acrolinx create secret tls acrolinx-tls-cert --cert=path/to/tls.cert --key=path/to/tls.key
+```
+
+Then configure the name of the secret in your values.yaml file:
+```yaml
+platform:
+  spec:
+    ingress:
+      tlsSecretName: "acrolinx-tls-cert"
+```
+
+This will also enable an automatic redirect from port 80 to 443 to ensure the use of the secure connection.
 
 ### Installation and Upgrades
 
