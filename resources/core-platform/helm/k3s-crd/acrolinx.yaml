@@ -35,8 +35,8 @@ spec:
 
     ### A list of feature flags that should be enabled. Our support staff may ask you to add flags here. Format: "{feature-1,feature-2}"
     platform.features: "{}"
-### Guidance package
-platform.spec.guidance: "standard:43854"
+    ### Guidance package
+    platform.spec.guidance: "standard:43854"
 valuesContent: |-
   platform:
     spec:
