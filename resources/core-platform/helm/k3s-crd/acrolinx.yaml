@@ -17,12 +17,12 @@ metadata:
 spec:
   repo: https://acrolinx.github.io/helm/
   chart: acrolinx-platform
-  version: "0.8.13+2021.03"
+  version: "0.8.14+2021.03"
   set:
     ### Image download - Enter your credentials for the Acrolinx download area
     ### to be able to download the container images.
-    images.download_area_user: ""
-    images.download_area_pwd: ""
+    images.downloadAreaUser: ""
+    images.downloadAreaPwd: ""
 
     ### Configuration directory
     platform.spec.securityContext.runAsUser: 1001
@@ -30,11 +30,15 @@ spec:
     platform.spec.coreServer.overlayDirectory.volumeSource.hostPath.path: >
       /home/acrolinx/config
 
+    ### Name of the secret that contains the TLS certificate.
+    platform.spec.ingress.tlsSecretName: ""
+
+    ### A list of feature flags that should be enabled. Our support staff may ask you to add flags here. Format: "{feature-1,feature-2}"
+    platform.features: "{}"
 ### Guidance package
 platform.spec.guidance: "standard:43854"
 valuesContent: |-
   platform:
-    features: []
     spec:
       languageServers:
         - name: default
