@@ -1,7 +1,3 @@
----
-title: Capture Cluster State For Acrolinx Support
----
-
 # Observe Acrolinx Running on Top of Kubernetes
 
 System observability is an important topic. It's all about ensuring everything is functioning as intended. Continuously monitoring and detecting errors or system malfunctions always crucial. In case of problems, we can help our Standard Stack customers troubleshooting.
