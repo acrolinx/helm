@@ -1,7 +1,7 @@
 Acrolinx Platform 2021.03 Helm Chart
 ===========================================================
 
-This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.15 in a single node Kubernetes cluster.
+This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.16 in a single node Kubernetes cluster.
 
 About
 -------
@@ -76,7 +76,7 @@ Usage
 
 You can find the Acrolinx Helm repository with all our charts at [https://acrolinx.github.io/helm/][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.15+2021.03.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.16+2021.03.tgz`, or via a [Helm repository][helm-repos].
 If you're installing from a repository, you may have to [add that repository][helm-repo-add] first.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install] it makes no difference.
@@ -85,7 +85,7 @@ The chart name from the repository, the `.` or the `.tgz` file all appear in the
 Add The Repo
 -------------
 
-Add the Acrolinx Helm repository as described [here][acrolinx-helm-repo-add]. 
+Add the Acrolinx Helm repository as described [here][acrolinx-helm-repo-add].
 
 ### Exploration
 
@@ -241,6 +241,23 @@ For all status details:
 kubectl get coreplatform acrolinx -o jsonpath="{.status}" -n acrolinx | jq
 ```
 
+### Suspending the Acrolinx Platform
+
+It can be useful to shut down a Acrolinx Platform instance without deleting it completely.
+This allows a quick restart and keeps resources such as physical volumes claimed.
+Use cases for this are backups or freeing resources used by a test or staging instances.
+
+This functionality is provided by the `acrolinx.com/suspend` annotation. Setting
+it to the string `"true"` will stop all workloads created for the annotated
+instance:
+
+```yaml
+metadata:
+  annotations:
+    acrolinx.com/suspend: "true"
+```
+
+To restart the instance, remove the annotation or set it to `"false"`.
 
 ### Troubleshooting
 
