@@ -16,7 +16,7 @@ metadata:
 spec:
   repo: https://acrolinx.github.io/helm/
   chart: acrolinx-platform
-  version: "0.8.16+2021.03"
+  version: "0.8.17+2021.03"
   set:
     ### Guidance package
     platform.spec.guidance: "standard:43854"
