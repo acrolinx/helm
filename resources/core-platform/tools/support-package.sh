@@ -148,6 +148,9 @@ for ns in "${curns?}" acrolinx "${sysns?}" kube-system olm operators; do
         >"${nsDir?}"/k8s-other-logs.txt || true
 done
 
+log "📰 Add journald logs for acrolinx as zip file. Works only if this streaming logs to journald is enabled and the user is in group system-journald"
+journalctl --output-fields=ACROLINX_CONTAINER,ACROLINX_POD,ACROLINX_FILENAME,MESSAGE --identifier=acrolinx -o json | gzip -9 > "${targetDir?}/journald.gz"
+
 log "🎬 Created support package in '${targetDir?}'."
 
 if [ ${zip?} -eq 1 ]; then
