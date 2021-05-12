@@ -1,7 +1,7 @@
-Acrolinx Platform 2021.03 Helm Chart
+Acrolinx Platform 2021.05 Helm Chart
 ===========================================================
 
-This Helm chart installs the Acrolinx Platform 2021.03 and the Acrolinx Core Platform Operator 0.8.18 in a single node Kubernetes cluster.
+This Helm chart installs the Acrolinx Platform 2021.05 and the Acrolinx Core Platform Operator 1.0.1 in a single node Kubernetes cluster.
 
 About
 -------
@@ -11,7 +11,7 @@ It scores your content based on style, grammar, terminology, and tone of voice.
 The higher your Acrolinx Score, the better your content.
 It works with over 30 authoring tools and helps writers to enhance texts.
 Visit our [blog][acrolinx-blog] to learn why better content results in better business.
-See the [release notes][acrolinx-release-notes] for what's new in version 2021.03.
+See the [release notes][acrolinx-release-notes] for what's new in version 2021.05.
 
 Since version 2021.02, the Acrolinx Platform has a [containerized][docker-what-is-a-container] architecture that's running in a Kubernetes cluster.
 [Kubernetes][kubernetes-home] (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
@@ -76,7 +76,7 @@ Usage
 
 You can find the Acrolinx Helm repository with all our charts at [https://acrolinx.github.io/helm/][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-0.8.18+2021.03.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-1.0.1+2021.05.tgz`, or via a [Helm repository][helm-repos].
 If you're installing from a repository, you may have to [add that repository][helm-repo-add] first.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install] it makes no difference.
@@ -279,7 +279,7 @@ Just execute the script as described [here][acrolinx-helm-repo-support-package-s
 [acrolinx-helm-repo-support-package-script-manual]: https://acrolinx.github.io/helm/resources/core-platform/tools/support-package-user-manual.md
 [acrolinx-home]: https://www.acrolinx.com
 [acrolinx-platform]: https://www.acrolinx.com/the-acrolinx-content-strategy-governance-platform/
-[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.03/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
+[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.05/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
 [acrolinx-support]: https://support.acrolinx.com/hc/en-us
 [docker-what-is-a-container]: https://www.docker.com/resources/what-container
 [helm-3]: https://helm.sh/blog/helm-3-released/

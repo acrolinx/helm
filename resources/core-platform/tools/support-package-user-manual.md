@@ -6,11 +6,11 @@ System observability is an important topic. It's all about ensuring everything i
 
 Assuming that you’re running the Acrolinx Platform on a private (on-prem) host of yours as our Standard Stack customer. 
 
-Creating a `Support Package` and handing over the collected data to our Support team at Acrolinx they can help you troubleshoot the operational issue that you might have encountered with.
+Creating a "Support Package" and handing over the collected data to our Support team at Acrolinx they can help you troubleshoot the operational issue that you might have encountered with.
 
-The `Support Package Script` is a simple executable shell script that collects all collectable output at the execution time about your Kubernetes cluster. Then, the collected data (`Support Package`) can be sent to our Support team or attached to open tickets.
+The "Support Package Script" is a simple executable shell script that collects all collectable output at the execution time about your Kubernetes cluster. Then, the collected data ("Support Package") can be sent to our Support team or attached to open tickets. It's a supplement to the support package you can download via the dashboard.
 
-**Note:** *The script contains various `kubectl` command procedures to gather info about the existing Kubernetes resources and read logs from running pods. Executing the script shouldn’t have any affect on your running Acrolinx instance or cause downtime. Let us know if you encounter any error when using the script!* 
+**Note:** *The script contains various `kubectl` command procedures to gather info about the existing Kubernetes resources and read logs from running pods. Executing the script shouldn’t have any affect on your running Acrolinx instance or cause downtime. Let us know if you encounter any errors when using the script!* 
 
 **Prerequisites:**
 - `bzip2` installed on host.
@@ -18,12 +18,15 @@ The `Support Package Script` is a simple executable shell script that collects a
 ### Get it
 
 You can download the support package script [here](https://acrolinx.github.io/helm/resources/core-platform/tools/support-package.sh).
+```shell 
+curl https://acrolinx.github.io/helm/resources/core-platform/tools/support-package.sh > support-package.sh
+```
 
 ### How to Use
 
 **Note:** *Basic Linux knowledge is suggested.*
 
-Supposed that you have the script `support-package.sh` (can be downloaded among the Acrolinx Platform deliverables from MADAM) and placed on your Linux-based Acrolinx installation host.
+Supposed that you downloaded the script `support-package.sh` and placed on your Linux-based Acrolinx installation host.
 
 #### 1. Make Executable 
 To make the `support-package.sh` file executable:
@@ -31,14 +34,16 @@ To make the `support-package.sh` file executable:
 $ chmod +x support-package.sh
 ```
 #### 2. Run
-Execute the script to collect evidence:
+Assuming you have a Standard Stack installation in the `acrolinx` and `acrolinx-system` namespaces, execute the script to collect evidence:
 ```
-$ ./support-package.sh
+$ ./support-package.sh -n acrolinx -s acrolinx-system
 ```
 
 **Note:** *Try run the support package script frequently to capture relevant logs and error events when a problem is discovered in your deployment.*
 
-When you run the script, it creates an archive of the collected data from your Kubernetes cluster. It contains details about the existing resources (Namespaces, Pods, ConfigMaps, ... ) related to the Acrolinx deployment. You can locate this archive in the script execution directory to check the collected output. 
+When you run the script, it creates an archive of the collected data from your Kubernetes cluster. It contains details about the existing resources (`Namespaces`, `Pods`, `ConfigMaps`, ... ) related to the Acrolinx deployment. You can locate this archive in the script execution directory to check the collected output. 
+
+:point_right: The script _doesn't_ collect any `Secret`s or `ConfigMap` data. 
 
 The support package archive's naming format is `support-package-<timestamp_ISO_8601>` with extension `.tar.bz2`. 
 
@@ -79,7 +84,8 @@ Try rerun the support package script.
 **Note:** *This package required to compress the `tar` archive better.*
 
 ### Run Options
-Using the supported run modifier options the script execution can be configured to get info from specific namespaces (in case your Acrolinx deployment is in another namespace than `default`) or to continue without archiving the collected details.
+
+Using the supported run modifier options, the script execution can be configured to get info from specific namespaces (in case your Acrolinx deployment is in another namespace than `default`) or to continue without archiving the collected details.
 
 Use the `-h` flag to print help:
 ```
@@ -93,9 +99,9 @@ Usage:
 
 Options:
   -h                Print this help message and exit.
-  -o <directory>    Output directory (defaults to '.')
-  -n <namespace>    Acrolinx namespace (defaults to current namespace: default)
-  -s <namespace>    Operator installation namespace (defaults to acrolinx-system)
+  -o <directory>    Output directory (defaults to `.`)
+  -n <namespace>    Acrolinx namespace (defaults to current namespace: `default`)
+  -s <namespace>    Operator installation namespace (defaults to `acrolinx-system`)
   -v                Verbose?
   -Z                Do not create an archive, and do not delete the support archive directory.
 
@@ -110,83 +116,7 @@ We can provide support and resolve the issue together based on the collected evi
 
 Our Support team can even help you without handing over the support package. But it's important to have them preserved in order to use them in the investigation phase. You can use it as a source of information to help answer our Support team members' questions. What's happening with it afterward is entirely up to you. 
 
-### What Is Being Collected?
-At the time of writing the support package script collects the followings about your Kubernetes cluster and the existing resources in it:
-- List of available Namespaces.
-    - The script creates directories with matching name and place the namespace-related info into them.
-- In general 
-    - available logs (depends on log retention period) from existing pods and,
-    - cluster events.
-- The script execution time printed to file: `snapshot-time.txt` (simple timestamp).
-- Merged kubeconfig settings (of namespace `default`) printed to file: `default-namespace.txt`.
-- From the Acrolinx namespaces if exists (for example: `default`,`acrolinx-system`, `kube-system`, `olm`, `operators`).
-    - Kubernetes resources (only from the `acrolinx-system` namespace):
-        - ClusterServiceVersion (CSV)
-        - InstallPlan (IP)
-        - ConfigMap (CM)
-    - Form the Acrolinx deployment namespace (default is the `default` K8s namespace, can be differ in your environment and specified at script run via flag `-n`).
-    - Outputs of `kubectl` commands (in directories named after the `namespace`):
-        - Get all resources: `kubectl get all` (k8s-all.txt)
-        - Describe pods: `kubectl describe pods` (k8s-pods.txt)
-        - Describe deployments: `kubectl describe deployments` (k8s-deployments.txt)
 
-**Note:** *The script doesn't collect any Secret type Kubernetes resource. The collected ConfigMaps are also only from the Acrolinx deployment namespace!*
-
-**Disclaimer:** *It's the customer's responsibility to check whether the collected content meets with their compliance and policies!*
-
-See example `support-package` directory content tree:
-```
-$ tree support-package-20210319T083136Z/
-support-package-20210319T083136Z/
-├── acrolinx-system
-│   ├── install-config-maps.txt
-│   ├── install-plans.txt
-│   ├── install-versions.txt
-│   ├── k8s-all.txt
-│   ├── k8s-deployments.txt
-│   ├── k8s-operator-logs.txt
-│   ├── k8s-other-logs.txt
-│   └── k8s-pods.txt
-├── default
-│   ├── k8s-acrolinx-core-server-0-logs.previous.txt
-│   ├── k8s-acrolinx-core-server-0-logs.txt
-│   ├── k8s-acrolinx-friendly-error-pages-7574cd4769-b5zqw-logs.previous.txt
-│   ├── k8s-acrolinx-friendly-error-pages-7574cd4769-b5zqw-logs.txt
-│   ├── k8s-acrolinx-friendly-error-pages-7574cd4769-lggt4-logs.previous.txt
-│   ├── k8s-acrolinx-friendly-error-pages-7574cd4769-lggt4-logs.txt
-│   ├── k8s-acrolinx-image-detail-fetcher-1616142600-zbd5m-logs.previous.txt
-│   ├── k8s-acrolinx-image-detail-fetcher-1616142600-zbd5m-logs.txt
-│   ├── k8s-acrolinx-language-server-6844598b44-cts4l-logs.previous.txt
-│   ├── k8s-acrolinx-language-server-6844598b44-cts4l-logs.txt
-│   ├── k8s-acrolinx-target-service-5448dd67f9-f8bfg-logs.previous.txt
-│   ├── k8s-acrolinx-target-service-5448dd67f9-f8bfg-logs.txt
-│   ├── k8s-all.txt
-│   ├── k8s-coreplatforms.txt
-│   ├── k8s-deployments.txt
-│   ├── k8s-events.txt
-│   ├── k8s-impfo-config-maps.txt
-│   ├── k8s-other-logs.txt
-│   └── k8s-pods.txt
-├── default-namespace.txt
-├── kube-system
-│   ├── k8s-all.txt
-│   ├── k8s-deployments.txt
-│   ├── k8s-other-logs.txt
-│   └── k8s-pods.txt
-├── olm
-│   ├── k8s-all.txt
-│   ├── k8s-deployments.txt
-│   ├── k8s-other-logs.txt
-│   └── k8s-pods.txt
-├── operators
-│   ├── k8s-all.txt
-│   ├── k8s-deployments.txt
-│   ├── k8s-other-logs.txt
-│   └── k8s-pods.txt
-└── snapshot_time.txt
-```
-
-**Note**: *All the captured data is written in plain text and can be reviewed anytime in the archive.*
 ## Check the Deployment Manually (Using `kubectl`)
 
 **Note:** *Basic Kubernetes knowledge is suggested.*
@@ -210,6 +140,8 @@ Acrolinx custom resource definitions:
 - CorePlatform: `coreplatform`
 
 **Note:** *This isn’t a full list.*
+
+:point_right: Don't forget to add the `--namespace` flag to specify the namespace you're interested in. Alternatively, you can add `--all-namespaces` to operate on all namespaces.
 
 ### Listing Resources
 
@@ -264,7 +196,7 @@ $ kubectl describe coreplatform
 To print logs from containers in a pod, use the kubectl logs command.
 
 ```
-$ kubectl logs [pod-name]
+$ kubectl logs [pod-name] [container-name]
 ```
 
 **Note:** *To stream logs from a pod, use the `-f` switch. Example: `kubectl logs -f [pod-name]`*
