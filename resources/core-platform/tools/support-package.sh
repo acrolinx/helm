@@ -149,7 +149,10 @@ for ns in "${curns?}" acrolinx "${sysns?}" kube-system olm operators; do
 done
 
 log "📰 Add journald logs for acrolinx as zip file. Works only if this streaming logs to journald is enabled and the user is in group system-journald"
-journalctl --output-fields=ACROLINX_CONTAINER,ACROLINX_POD,ACROLINX_FILENAME,MESSAGE --identifier=acrolinx -o json | gzip -9 > "${targetDir?}/journald.gz"
+# --output-fields=ACROLINX_CONTAINER,ACROLINX_POD,ACROLINX_FILENAME,MESSAGE
+# cannot use that parameter, because journalctl on redhat is too old, needs at least version 236
+# this makes the gz file a bit bigger than necessary
+journalctl --identifier=acrolinx -o json | gzip -9 > "${targetDir?}/journald.gz"
 
 log "🎬 Created support package in '${targetDir?}'."
 

@@ -1,7 +1,7 @@
 Acrolinx Platform 2021.05 Helm Chart
 ===========================================================
 
-This Helm chart installs the Acrolinx Platform 2021.05 and the Acrolinx Core Platform Operator 1.0.3 in a single node Kubernetes cluster.
+This Helm chart installs the Acrolinx Platform 2021.05 and the Acrolinx Core Platform Operator 1.0.4 in a single node Kubernetes cluster.
 
 About
 -------
@@ -76,7 +76,7 @@ Usage
 
 You can find the Acrolinx Helm repository with all our charts at [https://acrolinx.github.io/helm/][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-1.0.3+2021.05.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-1.0.4+2021.05.tgz`, or via a [Helm repository][helm-repos].
 If you're installing from a repository, you may have to [add that repository][helm-repo-add] first.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install] it makes no difference.

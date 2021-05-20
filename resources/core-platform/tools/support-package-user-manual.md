@@ -65,6 +65,25 @@ This example output shows the following:
 
 **Note:** *By default the collected data and `kubectl` outputs are written into a directory and being archived. When the script exists it deletes this temporary directory. Use the `-Z` flag to instruct the script to don't create an archive and leave the created directory on the host after the execution finished. See more about run modifiers in the `Run Options` sections.*
 
+#### Self hosted systems
+
+On self hosted systems installed by the helm chart there is by default a logging agent active, that copies the logs of all containers of the kubernetes cluster to journald.
+The support script calls journalctl to retrieve also these logs and packs them into a journald.gz file.
+The output is json. The following fields are interesting:
+
+- ACROLINX_POD: id of the pod of the log
+- ACROLINX_CONTAINER: id of the container of the log
+- ACROLINX_FILENAME: which log file (kubernetes uses internal some log rotation and counts 0.log, 1.log, ...)
+- MESSAGE: the logged message as written by the container. It contains already a timestamp.
+
+For further analysis it is recommended to install the `jq` tool. An example command would be (executed on the unzipped file)
+
+```shell
+grep '"ACROLINX_CONTAINER":"language-server' journald | jq -s '.[] | .ACROLINX_POD, .MESSAGE'
+```
+
+to show the collected logs and pod of all language servers.
+
 #### Troubleshoot
 
 ##### Output: `FATAL: bzip2 must be installed to create an archive.`
