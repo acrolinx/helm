@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: acrolinx-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: acrolinx
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: acrolinx
+  namespace: acrolinx-system
+spec:
+  repo: https://acrolinx.github.io/helm/
+  chart: acrolinx-platform
+  version: "1.0.5+2021.05"
+  set:
+    ### Guidance package
+    platform.spec.guidance: "standard:43854"
+
+    ### Image download - Enter your credentials for the Acrolinx download area
+    ### to be able to download the container images.
+    images.downloadAreaUser: ""
+    images.downloadAreaPwd: ""
+
+    ### Configuration directory
+    platform.spec.securityContext.runAsUser: 1001
+    platform.spec.securityContext.runAsGroup: 1001
+    platform.spec.coreServer.overlayDirectory.volumeSource.hostPath.path: >
+      /home/acrolinx/config
+
+    ### Name of the secret that contains the TLS certificate.
+    platform.spec.ingress.tlsSecretName: ""
+
+    ### A list of feature flags that should be enabled. Our support staff may ask you to add flags here. Format: "{feature-1,feature-2}"
+    platform.features: "{}"
+  valuesContent: |-
+    platform:
+      spec:
+        languageServers:
+          - name: default
+            languages: [ en, de ]
+          #- name: large
+          #  languages: [ en, de ]
+          #  template:
+          #    containers:
+          #      - name: language-server
+          #        resources:
+          #          limits:
+          #            memory: 6Gi
+        configuration:
+          ### Override settings from the `server/bin/coreserver.properties`.
+          coreserver.properties: ""
+      ### Database settings.
+      ### Preconfigured to work with the test database.
+      persistence:
+        ### Set to `true` to install Postgres test databases into the cluster.
+        ### Never set to `true` in a production system!!
+        installTestDB: false
