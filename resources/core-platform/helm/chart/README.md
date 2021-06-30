@@ -174,7 +174,7 @@ platform:
 
 #### Database Connections
 
-Add the settings for the Target service database to `persistence.credentials`.
+Add the settings for the Targets database to `persistence.credentials`.
 You can configure settings for the [terminology database][acrolinx-docs-term-db-settings], the [reporting database][acrolinx-docs-reporting-db-settings], and the [JReport databases][acrolinx-docs-jreport-db-settings] in the `server/bin/persistence.properties` file in the configuration directory.
 
 If you want to test the Acrolinx Platform without any external databases, remove any `persistence.credentials` and set `installTestDB` to `true`:
