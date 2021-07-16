@@ -1,7 +1,7 @@
-Acrolinx Platform 2021.07 Helm Chart
+Acrolinx Platform 2021.05 Helm Chart
 ===========================================================
 
-This Helm chart installs version 2021.07 of the Acrolinx Platform and version 1.1.4 of the Acrolinx Acrolinx Core Platform operator in a single-node Kubernetes cluster.
+This Helm chart installs version 2021.05 of the Acrolinx Platform and version 1.1.5 of the Acrolinx Acrolinx Core Platform operator in a single-node Kubernetes cluster.
 
 If you plan to install an older version of Acrolinx, have a look at the [documentation of previous chart versions][acrolinx-helm-repo-old-versions-docs].
 
@@ -13,7 +13,7 @@ It helps your writers with standard and custom guidelines and scores your conten
 The higher your Acrolinx Score, the better your content.
 It works with over 30 authoring tools and helps writers enhance texts.
 Visit our [blog][acrolinx-blog] to learn why better content results in better business.
-See the [release notes][acrolinx-release-notes] for what's new in 2021.07.
+See the [release notes][acrolinx-release-notes] for what's new in 2021.05.
 
 Since version 2021.02, the Acrolinx Platform has used a [containerized][docker-what-is-a-container] architecture that runs in a Kubernetes cluster.
 [Kubernetes][kubernetes-home] (K8s) is an open-source system for automating deployment, scaling, and management of containerized applications.
@@ -80,7 +80,7 @@ Usage
 
 You can find the Acrolinx Helm repository and all Acrolinx Helm charts in the [Acrolinx Helm Repository][acrolinx-helm-repo].
 
-Helm charts can be distributed as plain archives, such as `acrolinx-platform-1.1.4+2021.07.tgz`, or via a [Helm repository][helm-repos].
+Helm charts can be distributed as plain archives, such as `acrolinx-platform-1.1.5+2021.05.tgz`, or via a [Helm repository][helm-repos].
 If you plan to install from a repository, you may have to [add that repository][helm-repo-add] first to make sure that the client knows which repositories to search for Helm charts.
 You can even unpack the archive and run the installation from the resulting directory.
 For the [installation command-line syntax][helm-install], it makes no difference.
@@ -273,10 +273,10 @@ Send the resulting `.tgz` file to [Acrolinx Support][acrolinx-support].
 [acrolinx-docs]: https://docs.acrolinx.com/doc/en
 [acrolinx-docs-configuration-directory]: https://docs.acrolinx.com/coreplatform/latest/en/advanced/the-configuration-directory
 [acrolinx-docs-download-area]: https://docs.acrolinx.com/coreplatform/latest/en/acrolinx-on-premise-only/maintain-the-core-platform/download-updated-software
-[acrolinx-docs-jreport-db-settings]: https://docs.acrolinx.com/coreplatform/2021.07/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-analytics-database
-[acrolinx-docs-reporting-db-settings]: https://docs.acrolinx.com/coreplatform/2021.07/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-reporting-database
+[acrolinx-docs-jreport-db-settings]: https://docs.acrolinx.com/coreplatform/2021.05/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-analytics-database
+[acrolinx-docs-reporting-db-settings]: https://docs.acrolinx.com/coreplatform/2021.05/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-reporting-database
 [acrolinx-docs-steps-to-install-acrolinx]: https://docs.acrolinx.com/coreplatform/latest/en/acrolinx-standard-stack-only/install-acrolinx-for-the-first-time/steps-to-install-acrolinx
-[acrolinx-docs-term-db-settings]: https://docs.acrolinx.com/coreplatform/2021.07/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-terminology-database
+[acrolinx-docs-term-db-settings]: https://docs.acrolinx.com/coreplatform/2021.05/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-terminology-database
 [acrolinx-helm-repo]: https://acrolinx.github.io/helm/
 [acrolinx-helm-repo-add]: https://acrolinx.github.io/helm/#add
 [acrolinx-helm-repo-old-versions-docs]: https://github.com/acrolinx/helm/tree/gh-pages/resources/core-platform/helm/chart/docs
@@ -284,7 +284,7 @@ Send the resulting `.tgz` file to [Acrolinx Support][acrolinx-support].
 [acrolinx-helm-repo-support-package-script-manual]: https://acrolinx.github.io/helm/resources/core-platform/tools/support-package-user-manual.md
 [acrolinx-home]: https://www.acrolinx.com
 [acrolinx-platform]: https://www.acrolinx.com/the-acrolinx-content-strategy-governance-platform/
-[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.07/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
+[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2021.05/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
 [acrolinx-support]: https://support.acrolinx.com/hc/en-us
 [docker-what-is-a-container]: https://www.docker.com/resources/what-container
 [helm-3]: https://helm.sh/blog/helm-3-released/
