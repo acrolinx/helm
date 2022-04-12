@@ -273,10 +273,10 @@ Send the resulting `.tgz` file to [Acrolinx Support][acrolinx-support].
 [acrolinx-docs]: https://docs.acrolinx.com/doc/en
 [acrolinx-docs-configuration-directory]: https://docs.acrolinx.com/coreplatform/latest/en/advanced/the-configuration-directory
 [acrolinx-docs-download-area]: https://docs.acrolinx.com/coreplatform/latest/en/acrolinx-on-premise-only/maintain-the-core-platform/download-updated-software
-[acrolinx-docs-jreport-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03.1/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-analytics-database
-[acrolinx-docs-reporting-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03.1/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-reporting-database
+[acrolinx-docs-jreport-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-analytics-database
+[acrolinx-docs-reporting-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-reporting-database
 [acrolinx-docs-steps-to-install-acrolinx]: https://docs.acrolinx.com/coreplatform/latest/en/acrolinx-standard-stack-only/install-acrolinx-for-the-first-time/steps-to-install-acrolinx
-[acrolinx-docs-term-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03.1/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-terminology-database
+[acrolinx-docs-term-db-settings]: https://docs.acrolinx.com/coreplatform/2022.03/en/acrolinx-standard-stack-only/external-databases/connect-to-an-external-terminology-database
 [acrolinx-helm-repo]: https://acrolinx.github.io/helm/
 [acrolinx-helm-repo-add]: https://acrolinx.github.io/helm/#add
 [acrolinx-helm-repo-old-versions-docs]: https://github.com/acrolinx/helm/tree/gh-pages/resources/core-platform/helm/chart/docs
@@ -284,7 +284,7 @@ Send the resulting `.tgz` file to [Acrolinx Support][acrolinx-support].
 [acrolinx-helm-repo-support-package-script-manual]: https://acrolinx.github.io/helm/resources/core-platform/tools/support-package-user-manual.md
 [acrolinx-home]: https://www.acrolinx.com
 [acrolinx-platform]: https://www.acrolinx.com/the-acrolinx-content-strategy-governance-platform/
-[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2022.03.1/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
+[acrolinx-release-notes]: https://docs.acrolinx.com/coreplatform/2022.03/en/acrolinx-core-platform-releases/acrolinx-release-notes-including-subsequent-service-releases
 [acrolinx-support]: https://support.acrolinx.com/hc/en-us
 [docker-what-is-a-container]: https://www.docker.com/resources/what-container
 [helm-3]: https://helm.sh/blog/helm-3-released/
