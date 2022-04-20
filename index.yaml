@@ -3,10 +3,10 @@ entries:
   acrolinx-platform:
   - apiVersion: v2
     appVersion: 2022.03.1
-    created: "2022-04-06T17:02:35.438239832Z"
+    created: "2022-04-20T16:20:33.282912+02:00"
     description: 'A Helm chart for the Acrolinx Core Platform operator: Runs the Acrolinx
       Core Platform.'
-    digest: 6565074ff538bcae429bad2ca6f4679efe72775e78914485a5b028bf936bca5f
+    digest: 91c7d288aae477d6a088b3460d1592e30e059637e310c99b65790792faf5a3f3
     name: acrolinx-platform
     type: application
     urls:
