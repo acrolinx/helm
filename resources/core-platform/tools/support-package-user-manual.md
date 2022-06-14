@@ -63,13 +63,13 @@ This example output shows the following:
 - A `support-package-20210319T123333Z.tar.bz2` archive exists.
     - This contains the data and logs collected by the script.
 
-**Note:** *By default the collected data and `kubectl` outputs are written into a directory and being archived. When the script exists it deletes this temporary directory. Use the `-Z` flag to instruct the script to don't create an archive and leave the created directory on the host after the execution finished. See more about run modifiers in the `Run Options` sections.*
+**Note:** *By default the collected data and `kubectl` outputs are written into a directory and being archived. When the script exists it deletes this temporary directory. Use the `-Z` command-line option to instruct the script to don't create an archive and leave the created directory on the host after the execution finished. See more about run modifiers in the `Run Options` sections.*
 
 #### Self hosted systems
 
 On self hosted systems installed by the helm chart there is by default a logging agent active, that copies the logs of all containers of the kubernetes cluster to journald.
 The support script calls journalctl to retrieve also these logs and packs them into a journald.gz file.
-The output is json. The following fields are interesting:
+The output is JSON. The following fields are interesting:
 
 - ACROLINX_POD: id of the pod of the log
 - ACROLINX_CONTAINER: id of the container of the log
@@ -106,7 +106,7 @@ Try rerun the support package script.
 
 Using the supported run modifier options, the script execution can be configured to get info from specific namespaces (in case your Acrolinx deployment is in another namespace than `default`) or to continue without archiving the collected details.
 
-Use the `-h` flag to print help:
+Use the `-h` option to print help:
 ```
 $ ./support-package.sh -h
 ```
@@ -160,7 +160,7 @@ Acrolinx custom resource definitions:
 
 **Note:** *This isn’t a full list.*
 
-:point_right: Don't forget to add the `--namespace` flag to specify the namespace you're interested in. Alternatively, you can add `--all-namespaces` to operate on all namespaces.
+:point_right: Don't forget to add the `--namespace` option to specify the namespace you're interested in. Alternatively, you can add `--all-namespaces` to operate on all namespaces.
 
 ### Listing Resources
 
@@ -229,7 +229,7 @@ $ kubectl logs [pod-name] [container-name]
 To get a visual overview of your Kubernetes cluster state there’s a web UI that can be deployed as an individual service.
 Using the Kubernetes dashboard can help you check the existing resources in your cluster and edit configurations. Further more the UI shows the CPU and Memory utilization and even can help to notice errors quicker. 
 
-See more about how to deploy the Kuberneted Dashboard: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+See more about how to deploy the Kubernetes Dashboard: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 **Note:** *The Dashboard has built in role-based access control and authentication required to get access to its functions.*
 
