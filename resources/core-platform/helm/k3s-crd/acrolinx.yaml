@@ -29,8 +29,7 @@ spec:
     ### Configuration directory
     platform.spec.securityContext.runAsUser: 1001
     platform.spec.securityContext.runAsGroup: 1001
-    platform.spec.coreServer.overlayDirectory.volumeSource.hostPath.path: >
-      /home/acrolinx/config
+    platform.spec.coreServer.overlayDirectory.volumeSource.hostPath.path: /home/acrolinx/config
 
     ### Name of the secret that contains the TLS certificate.
     platform.spec.ingress.tlsSecretName: ""
